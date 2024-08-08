@@ -12,7 +12,6 @@ const app = express();
 const port = 5000;
 app.use(express.json());
 require('dotenv').config();
-// const stripe = require("stripe")("sk_test_51OeyPQSDGsRHH0YWQYUx41ffXedv8HHcyg7jqRb2RnTERWsfXG7MgD9uhC9Q3pkwHBe5LghlZdwfvnl5B4aiHs1h00yyPkJM1b")
 connectedToMongodb();
 
 
@@ -43,9 +42,9 @@ const clientSecret = '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'
 const UserModal = require("./model/User.model");
 passport.use(
     new GoogleStrategy({
-        clientID: clientId,
+        clientID: clientId,  
         clientSecret: clientSecret,
-        callbackURL: "http://localhost:5000/auth/google/callback",
+        callbackURL: "https://lenskart-backend-gcrz.onrender.com/auth/google/callback",
         passReqToCallback: true,
         scope: ["profile", "email"]
     }, async (request, accessToken, refreshToken, profile, done) => {
@@ -88,9 +87,6 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
         res.redirect(`http://localhost:3000/`);
     }
 );
-
-
-
 app.get('/getCookies', (req, res) => {
     try {
         const cookies = req.cookies.googleAccessCookie
@@ -130,49 +126,9 @@ app.get('/logout', (req, res) => {
 
 
 
-// // payement gateway
-// app.post('/create-payment-intent', async (req, res) => {
-//     const { amount, currency } = req.body;
-//     try {
-//         const paymentIntent = await stripe.paymentIntents.create({
-//             amount: amount,
-//             currency: currency,
-//         });
-//         res.status(200).json({ clientSecret: paymentIntent.client_secret });
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// });
-
-// // Google OAuth startrs
-// app.use(cookieSession({
-//     name: "lenskartSession",
-//     keys: ["sudhanshu"],
-//     maxAgeL: 24 * 60 * 60 * 100
-// }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-// app.use(cors)
-// app.get('/auth/google', passport.authenticate('google', { scope: ['email', 'profile'] }));
-// app.get('/google/callback',
-//     passport.authenticate('google', {
-//         successRedirect: 'http://localhost:5000/auth/google/callback',
-//         failureRedirect: '/failure'
-//     })
-// ); 
-// app.get('/userss', (req, res) => {
-//     res.status(200).send({ message: "logged in user " })
-// }) 
-// app.get('/failure', (req, res) => {
-//     res.send({ message: 'something went wrong while login' })
-// })
-// google Oauth ended here !!!
-
-
-
 
 
 
 app.listen(port, () => {
-    console.log(`LenscartClone listening on the port at http://localhost:${port}`);
+    console.log(`LenscartClone listening on the port at http://localhost:${port}`);  
 });

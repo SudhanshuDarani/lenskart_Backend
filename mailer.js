@@ -6,7 +6,7 @@ const transporter = nodemailer.createTransport({
     pass: 'uccj llbt fzns kost'
   }
 })
-const senderOrderConfirmationEmail = (to, orderDetails, orderTitle, priceExtracted, quantitesExtracted, totalAmount) => {
+const senderOrderConfirmationEmail = (to, orderDetails,totalAmount) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: to,
