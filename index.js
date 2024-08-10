@@ -84,7 +84,7 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
             maxAge: 20000000, httpOnly: true,
             secure: true
         });
-        res.redirect(`http://localhost:3000/`);
+        res.redirect(`https://lenskart-client-sudhanshu-daranis-projects.vercel.app/`);
     }
 );
 app.get('/getCookies', (req, res) => {
